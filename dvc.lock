@@ -1,0 +1,45 @@
+schema: '2.0'
+stages:
+  preprocess:
+    cmd: python src/ml_project/preprocess.py
+    deps:
+    - path: data/raw.csv
+      hash: md5
+      md5: 862372ab29efdc8947d7c60b8be47aff
+      size: 86
+    - path: src/ml_project/preprocess.py
+      hash: md5
+      md5: add640a73cbd3d318e2276d2d68c67f6
+      size: 263
+    outs:
+    - path: data/processed.csv
+      hash: md5
+      md5: 372d9b7dc3313d0129e28a9e80aebde6
+      size: 127
+  train:
+    cmd: python src/ml_project/train.py
+    deps:
+    - path: data/processed.csv
+      hash: md5
+      md5: 372d9b7dc3313d0129e28a9e80aebde6
+      size: 127
+    - path: src/ml_project/train.py
+      hash: md5
+      md5: 2174527241c925d9da5c047b65a6d112
+      size: 337
+    outs:
+    - path: models/model.pkl
+      hash: md5
+      md5: 237b4946ca488d6975be3e294edbf0fc
+      size: 1135
+  evaluate:
+    cmd: python src/ml_project/evaluate.py
+    deps:
+    - path: models/model.pkl
+      hash: md5
+      md5: 237b4946ca488d6975be3e294edbf0fc
+      size: 1135
+    - path: src/ml_project/evaluate.py
+      hash: md5
+      md5: cce14e210deeeec62420aa0d2542bc07
+      size: 452

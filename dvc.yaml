@@ -1,0 +1,23 @@
+stages:
+
+  preprocess:
+    cmd: python src/ml_project/preprocess.py
+    deps:
+      - src/ml_project/preprocess.py
+      - data/raw.csv
+    outs:
+      - data/processed.csv
+
+  train:
+    cmd: python src/ml_project/train.py
+    deps:
+      - src/ml_project/train.py
+      - data/processed.csv
+    outs:
+      - models/model.pkl
+
+  evaluate:
+    cmd: python src/ml_project/evaluate.py
+    deps:
+      - src/ml_project/evaluate.py
+      - models/model.pkl
